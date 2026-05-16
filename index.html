@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>💱 Currency Exchange</h1>
+        <button onclick="logout()" class="logout-btn">
+            Logout
+        </button>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="card">
+        <h2>Convert Currency</h2>
+
+        <!-- Amount Input -->
+        <div class="input-group">
+            <label>Amount</label>
+            <input 
+                type="number" 
+                id="amount" 
+                placeholder="Enter amount"
+                oninput="convertCurrency()"
+            >
+        </div>
+
+        <!-- After your converter card -->
+
+<!-- Favorites Card -->
+<div class="card">
+    <div class="card-header">
+        <h2>⭐ Favorite Pairs</h2>
+        <button class="add-fav-btn" onclick="saveFavorite()">
+            + Add Current
+        </button>
+    </div>
+    <div id="favorites-list">
+        <p class="empty">No favorites yet</p>
+    </div>
+</div>
+
+<!-- History Card -->
+<div class="card">
+    <div class="card-header">
+        <h2>🕐 Conversion History</h2>
+        <button class="clear-btn" onclick="clearHistory()">
+            Clear
+        </button>
+    </div>
+    <div id="history-list">
+        <p class="empty">No history yet</p>
+    </div>
+</div>
+
+<!-- Multi Currency Card -->
+<div class="card">
+    <h2>🌍 Multi-Currency View</h2>
+    <p class="sub-text">
+        See your amount in all currencies at once
+    </p>
+    <div class="input-group">
+        <label>Amount in USD</label>
+        <input 
+            type="number" 
+            id="multi-amount"
+            placeholder="Enter USD amount"
+            oninput="multiConvert()"
+        >
+    </div>
+    <div id="multi-results"></div>
+</div>
+
+        <!-- Currency Selectors -->
+        <div class="currency-row">
+            <div class="input-group">
+                <label>From</label>
+                <select id="from" onchange="convertCurrency()">
+                    <option value="USD">🇺🇸 USD - US Dollar</option>
+                    <option value="KES">🇰🇪 KES - Kenya Shilling</option>
+                    <option value="EUR">🇪🇺 EUR - Euro</option>
+                    <option value="GBP">🇬🇧 GBP - British Pound</option>
+                </select>
+            </div>
+
+            <!-- Swap Button -->
+            <button class="swap-btn" onclick="swapCurrencies()">
+                ⇄
+            </button>
+
+            <div class="input-group">
+                <label>To</label>
+                <select id="to" onchange="convertCurrency()">
+                    <option value="KES">🇰🇪 KES - Kenya Shilling</option>
+                    <option value="USD">🇺🇸 USD - US Dollar</option>
+                    <option value="EUR">🇪🇺 EUR - Euro</option>
+                    <option value="GBP">🇬🇧 GBP - British Pound</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Result Display -->
+        <div class="result-box" id="result-box">
+            <p class="result-label">Converted Amount</p>
+            <h2 id="result">0.00</h2>
+            <p id="rate-display" class="rate-info"></p>
+            <p id="rate-age"class="rate-info">
+                
+            </p>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="spinner" class="spinner hidden">
+            Converting...
+        </div>
+    </div>
+
+    <!-- History Card -->
+    <div class="card">
+        <h2>Recent Conversions</h2>
+        <div id="history-list">
+            <p class="empty">No conversions yet</p>
+        </div>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
