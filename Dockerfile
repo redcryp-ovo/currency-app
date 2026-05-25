@@ -1,24 +1,6 @@
-# Avoid interactive prompts
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install Apache and PHP together cleanly
-RUN apt-get update && apt-get install -y \
-    apache2 \
-    php \
-    php-mysqli \
-    libapache2-mod-php \
-    && apt-get clean
-
-# Remove default Apache page
-RUN rm -f /var/www/html/index.html
-
-# Copy your files
+FROM php:8.1-cli
+RUN docker-php-ext-install mysqli
 COPY . /var/www/html/
-
-# Set permissions
-RUN chmod -R 755 /var/www/html
-
-EXPOSE 80
-
-# Start Apache
-CMD ["apachectl", "-D", "FOREGROUND"]
+WORKDIR /var/www/html
+EXPOSE 8080
+CMD ["php","-S""0.0.0.0:8080", "-t","/var/www/html"]
