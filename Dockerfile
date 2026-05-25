@@ -1,11 +1,16 @@
-FROM php:8.1-apache
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Fix the MPM conflict
-RUN a2dismod mpm_event mpm_worker 2>/dev/null || true
-RUN a2enmod mpm_prefork
+# Install Apache and PHP together cleanly
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    php \
+    php-mysqli \
+    libapache2-mod-php \
+    && apt-get clean
 
-# Install MySQL extension
-RUN docker-php-ext-install mysqli
+# Remove default Apache page
+RUN rm -f /var/www/html/index.html
 
 # Copy your files
 COPY . /var/www/html/
@@ -15,5 +20,5 @@ RUN chmod -R 755 /var/www/html
 
 EXPOSE 80
 
-# Start Apache correctly
-CMD ["apache2-foreground"]
+# Start Apache
+CMD ["apachectl", "-D", "FOREGROUND"]
